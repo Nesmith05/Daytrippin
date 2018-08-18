@@ -1,9 +1,6 @@
 $(document).ready(function() {
-    // $("#possible-results").hide();
-    $("#weather").hide();
-    $("#zomato-table").hide();
-    $("#results-page").hide();
-
+    // $("#city-select").hide();
+    $(".results-container").hide();
     //////////////////////////////////////////////////////////////
     //////////////////////BEGIN FIREBASE//////////////////////////
     //////////////////////////////////////////////////////////////
@@ -232,7 +229,7 @@ $(document).ready(function() {
                     //omit the city that was originally searched
                     if(city.toUpperCase() != destinationOption.toUpperCase()){             
                         //create a box object for each city returned
-                        $("#top-ten").append("<div class='card column is-4 destinationCities' lat = '"+selectedLat+"' lng = '"+selectedLng+"'  cityName='" + destinationOption + "'><div class='card-header-title is-centered'>"+ destinationOption + "</div></div>");
+                        $("#top-ten").append("<div class='card column is-4 destinationCities'><div class='card-header-title is-centered' lat = '"+selectedLat+"' lng = '"+selectedLng+"'  cityName='" + destinationOption + "'>"+ destinationOption + "</div></div>");
 
                     };
                 }
@@ -242,13 +239,10 @@ $(document).ready(function() {
 
     function setDestination(){
         var destinationBox = $(this);
-        console.log(this);
         destination = destinationBox.attr("cityName");
         destinationLat = destinationBox.attr("lat");
         destinationLng = destinationBox.attr("lng");
         console.log(destination);
-        console.log(destinationLat);
-        console.log(destinationLng);
 
         // CALL js of all other team members
         eventbrite();
@@ -256,7 +250,7 @@ $(document).ready(function() {
         weather();
 
         //show results
-        // $("#results-page").show();
+        $("#results-page").show();
 
 
     }
@@ -275,7 +269,6 @@ $(document).ready(function() {
         }
         
         $.ajax(cities).done(function (response) {
-            console.log(cities.url);
         // console.log(response);
         var cityID = response.location_suggestions[0].id;
         var restuarant = {
@@ -294,7 +287,7 @@ $(document).ready(function() {
             list.forEach(element => {
             console.log(element.restaurant.name)
         
-            $("#zomato-body").append("<tr><td>" +  element.restaurant.name+ "</td><td>" + element.restaurant.location.address + "</td><td>"  + element.restaurant.cuisines );
+            $(".table > tbody").append("<tr><td>" +  element.restaurant.name+ "</td><td>" + element.restaurant.location.address + "</td><td>"  + element.restaurant.cuisines );
             });
         
         });
@@ -307,9 +300,8 @@ $(document).ready(function() {
     function eventbrite () {
 
         var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
-        // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
-        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng; + token;
-
+        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
+        // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + token;
 
         $.ajax({
             url: queryURL,
@@ -412,6 +404,7 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
 
     // Hide results section on page load
+    // $("#results-page").hide();
 
 
     $("#search-area").on("click", function(event) {
@@ -483,7 +476,7 @@ $(document).ready(function() {
 
 
     // Append train info to table on page
-    $("#last-searches").append("<p>" + "Within "
+    $("#possible-results").append("<p>" + "Within "
     + fbDistance + " Miles of " + v.titleCase(fbCity)
     + "</p>");
     });
