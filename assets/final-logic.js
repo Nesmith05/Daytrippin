@@ -204,7 +204,7 @@ function getBoundingBox(centerPoint, distance) {
 };
 
 function geonamesCities(){
-    var queryURL = 'http://api.geonames.org/citiesJSON?north='+north+'&south='+south+'&east='+east+'&west='+west+'&lang=de&username=nmanderson314&maxRows=7';
+    var queryURL = 'https://api.geonames.org/citiesJSON?north='+north+'&south='+south+'&east='+east+'&west='+west+'&lang=de&username=nmanderson314&maxRows=7';
     console.log(queryURL);
 
     $.ajax({
@@ -337,7 +337,7 @@ function weather() {
     // var destinationLat = 36.0726355 
     // var destinationLng = -79.7919754
     var weatherAPI = "=86e077f1801044c6bf8210536181308";
-    var queryURL = "http://api.apixu.com/v1/forecast.json?key" + weatherAPI + "&q=" + destinationLat + "," + destinationLng + "&days=3";
+    var queryURL = "https://api.apixu.com/v1/forecast.json?key" + weatherAPI + "&q=" + destinationLat + "," + destinationLng + "&days=3";
 
     $.ajax({
       url: queryURL,
