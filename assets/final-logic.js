@@ -450,6 +450,41 @@ $("#search-area").on("click", function(event) {
 //////////////////////////////////////////////////////////////
 ////////////////////////FIREBASE PULL/////////////////////////
 //////////////////////////////////////////////////////////////
+////////////// Firebase Storing User Information///////////////
+// Adding Recent searches
+$(".searchBtn").on("click", function (event) {
+    // Preventing Duplicates
+    event.preventDefault();
+
+
+
+// clear text-boxes
+$("#cityInput").val("");
+$("#distanceInput").val("");
+
+
+});
+
+database.ref().limitToLast(5).on("child_added", function (childSnapshot) { console.log(childSnapshot.val());
+
+
+// assign firebase variables to snapshots.
+var fbCity = childSnapshot.val().city;
+var fbDistance = childSnapshot.val().distance;
+
+
+// Append train info to table on page
+$("#possible-results").append("<p>" + "Within "
++ fbDistance + " Miles of " + v.titleCase(fbCity)
++ "</p>");
+
+});
+
+//////////////////////////////////////////////////////////////
+////////////////////////END: FIREBASE PULL////////////////////
+//////////////////////////////////////////////////////////////
+
+
 
 //////////////////////////////////////////////////////////////
 ////////////////////////END: FIREBASE PULL////////////////////
