@@ -1,4 +1,24 @@
 //////////////////////////////////////////////////////////////
+//////////////////////BEGIN FIREBASE//////////////////////////
+//////////////////////////////////////////////////////////////
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDrbAOcXQwc3wrl38mfUUr5FFIZGy_ctjo",
+    authDomain: "daytrippin-26a14.firebaseapp.com",
+    databaseURL: "https://daytrippin-26a14.firebaseio.com",
+    projectId: "daytrippin-26a14",
+    storageBucket: "daytrippin-26a14.appspot.com",
+    messagingSenderId: "869251076265"
+  };
+  firebase.initializeApp(config);
+
+
+//////////////////////////////////////////////////////////////
+//////////////////////END FIREBASE////////////////////////////
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
 //////////////////////BEGIN VARIABLES///////////////////////////
 //////////////////////////////////////////////////////////////
 //get nearby cities
@@ -13,6 +33,7 @@
 //
 var city;
 var distance=0;
+var distanceInput=0;
 var cityResults = [
     {
         resultNum: 0,
@@ -40,6 +61,13 @@ var destinationLng;
 //////////////////////////////////////////////////////////////
 //////////////////////BEGIN FUNCTIONS/////////////////////////
 //////////////////////////////////////////////////////////////
+function miToKmConvert(){
+    // 1 mi, mi(Int) = 1.609344 km
+    // 15 mi, mi(Int) = 15 × 1.609344 km = 24.14016 km
+    distance = distanceInput * 1.609344
+
+}
+
 
 function googleGeoCode(){
     var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + city + '&key=AIzaSyBPY1-NPGowiZS7Qh8AlOaUVeNnwWxtjVQ'
@@ -214,7 +242,7 @@ function setDestination(){
     // CALL js of all other team members
     eventbrite();
     zomato();
-    weather();
+    weather();gikgit 
 
 
 }
@@ -365,26 +393,29 @@ function weather() {
 $("#search-area").on("click", function(event) {
     event.preventDefault();
     city = $("#city-input").val().trim();
-    distance = parseInt($("#distance-input").val().trim());
+    distanceInput = parseInt($("#distance-input").val().trim());
+    console.log("Distance (mi)" + distanceInput);
     
-    if(city !='' && distance > 0){
+    if(city !='' && distanceInput > 0){
         $("#possible-results").empty();
         $(".destinationCard").empty();
 
         //convert distance from miles to km - set list of selected ranges because some of the search apis only accept up to 400km
-        if (distance == 50){
-            distance = 81;
-        }
-        else if (distance == 100){
-            distance = 161;
-        }
-        else if (distance == 150){
-            distance = 242;
-        }
-        else{
-            distance = 322;
-        };
+        miToKmConvert();
+        // if (distance == 50){
+        //     distance = 81;
+        // }
+        // else if (distance == 100){
+        //     distance = 161;
+        // }
+        // else if (distance == 150){
+        //     distance = 242;
+        // }
+        // else{
+        //     distance = 322;
+        // };
         console.log(city);
+        console.log("Distance (km)" + distance);
         googleGeoCode();
     }
 
