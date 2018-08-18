@@ -346,7 +346,7 @@ function weather() {
     // var destinationLng = -79.7919754
     var weatherAPI = "=86e077f1801044c6bf8210536181308";
     var queryURL = "http://api.apixu.com/v1/forecast.json?key" + weatherAPI + "&q=" + destinationLat + "," + destinationLng + "&days=3";
-
+    var dayonemintemp;
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -375,10 +375,12 @@ function weather() {
         
         $("#date1").append("");
         reminder();
+        //Natalie - moved declaring dayonemintemp to be outside of the 'then' function and setting the variable to be within the 'then' function due to errors encountered because 'response' is not defined outside of the 'then' function
+        dayonemintemp = response.forecast.forecastday[0].day.mintemp_f;
       });
 
 
-  var dayonemintemp = response.forecast.forecastday[0].day.mintemp_f;
+//   var dayonemintemp = response.forecast.forecastday[0].day.mintemp_f;
   function reminder() {
     if (dayonemintemp < 80) {
       $("#message1").append("Don't Forget a jacket!");
