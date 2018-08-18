@@ -13,6 +13,7 @@
 //
 var city;
 var distance=0;
+var distanceInput=0;
 var cityResults = [
     {
         resultNum: 0,
@@ -40,6 +41,13 @@ var destinationLng;
 //////////////////////////////////////////////////////////////
 //////////////////////BEGIN FUNCTIONS/////////////////////////
 //////////////////////////////////////////////////////////////
+function miToKmConvert(){
+    // 1 mi, mi(Int) = 1.609344 km
+    // 15 mi, mi(Int) = 15 × 1.609344 km = 24.14016 km
+    distance = distanceInput * 1.609344
+
+}
+
 
 function googleGeoCode(){
     var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + city + '&key=AIzaSyBPY1-NPGowiZS7Qh8AlOaUVeNnwWxtjVQ'
@@ -214,7 +222,7 @@ function setDestination(){
     // CALL js of all other team members
     eventbrite();
     zomato();
-    weather();
+    weather();gikgit 
 
 
 }
@@ -365,26 +373,29 @@ function weather() {
 $("#search-area").on("click", function(event) {
     event.preventDefault();
     city = $("#city-input").val().trim();
-    distance = parseInt($("#distance-input").val().trim());
+    distanceInput = parseInt($("#distance-input").val().trim());
+    console.log(distanceInput);
     
     if(city !='' && distance > 0){
         $("#possible-results").empty();
         $(".destinationCard").empty();
 
         //convert distance from miles to km - set list of selected ranges because some of the search apis only accept up to 400km
-        if (distance == 50){
-            distance = 81;
-        }
-        else if (distance == 100){
-            distance = 161;
-        }
-        else if (distance == 150){
-            distance = 242;
-        }
-        else{
-            distance = 322;
-        };
+        miToKmConvert();
+        // if (distance == 50){
+        //     distance = 81;
+        // }
+        // else if (distance == 100){
+        //     distance = 161;
+        // }
+        // else if (distance == 150){
+        //     distance = 242;
+        // }
+        // else{
+        //     distance = 322;
+        // };
         console.log(city);
+        console.log(distance);
         googleGeoCode();
     }
 
