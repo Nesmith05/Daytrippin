@@ -31,6 +31,8 @@
 //      http://api.geonames.org/citiesJSON?north=36.44395688601068&south=31.054033913989322&east=-77.38003110725805&west=-83.86342889274196&lang=de&username=nmanderson314
 //  4. store the list of cities for use and display
 //
+var database = firebase.database();
+
 var city;
 var distance=0;
 var distanceInput=0;
@@ -417,15 +419,31 @@ $("#search-area").on("click", function(event) {
         console.log(city);
         console.log("Distance (km)" + distance);
         googleGeoCode();
-    }
 
+        //add to firebase
+        database.ref().push({
+            city: city,
+            distance: distanceInput, 
+        });
+
+    }
     else {
         $("#possible-results").empty();
         $(".destinationCard").empty();
         $("#possible-results").append("Please enter required information.");
     }
-
 });
+
+
+//////////////////////////////////////////////////////////////
+////////////////////////FIREBASE PULL/////////////////////////
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+////////////////////////END: FIREBASE PULL////////////////////
+//////////////////////////////////////////////////////////////
+
+
 
 //when the user selects one of the cities returned
 $(document).on("click", ".destinationCities", setDestination);
