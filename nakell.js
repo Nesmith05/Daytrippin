@@ -3,7 +3,6 @@ function zomato(){
       "async": true,
       "crossDomain": true,
       "url": "https://developers.zomato.com/api/v2.1/cities?lat=" + destinationLat +"&lon="+ destinationLng,
-      
       "method": "GET",
       "headers": {
         "user-key": "c7288644a7a1a0bb320b8e22c80479c6",
