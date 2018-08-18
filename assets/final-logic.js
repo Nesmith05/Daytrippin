@@ -229,7 +229,7 @@ $(document).ready(function() {
                     //omit the city that was originally searched
                     if(city.toUpperCase() != destinationOption.toUpperCase()){             
                         //create a box object for each city returned
-                        $("#top-ten").append("<div class='card column is-4 destinationCities'><div class='card-header-title is-centered' lat = '"+selectedLat+"' lng = '"+selectedLng+"'  cityName='" + destinationOption + "'>"+ destinationOption + "</div></div>");
+                        $("#top-ten").append("<div class='card column is-4 destinationCities' lat = '"+selectedLat+"' lng = '"+selectedLng+"'  cityName='" + destinationOption + "'><div class='card-header-title is-centered'>"+ destinationOption + "</div></div>");
 
                     };
                 }
@@ -239,10 +239,13 @@ $(document).ready(function() {
 
     function setDestination(){
         var destinationBox = $(this);
+        console.log(this);
         destination = destinationBox.attr("cityName");
         destinationLat = destinationBox.attr("lat");
         destinationLng = destinationBox.attr("lng");
         console.log(destination);
+        console.log(destinationLat);
+        console.log(destinationLng);
 
         // CALL js of all other team members
         eventbrite();
@@ -269,6 +272,7 @@ $(document).ready(function() {
         }
         
         $.ajax(cities).done(function (response) {
+            console.log(cities.url);
         // console.log(response);
         var cityID = response.location_suggestions[0].id;
         var restuarant = {
@@ -287,7 +291,7 @@ $(document).ready(function() {
             list.forEach(element => {
             console.log(element.restaurant.name)
         
-            $(".table > tbody").append("<tr><td>" +  element.restaurant.name+ "</td><td>" + element.restaurant.location.address + "</td><td>"  + element.restaurant.cuisines );
+            $("#zomato-body").append("<tr><td>" +  element.restaurant.name+ "</td><td>" + element.restaurant.location.address + "</td><td>"  + element.restaurant.cuisines );
             });
         
         });
