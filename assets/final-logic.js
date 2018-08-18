@@ -292,8 +292,12 @@ function zomato(){
 //////////////////////NATASHA FUNCTION/////////////////////////
 
 function eventbrite () {
+    var lat= "&location.latitute=";
+    var long = "&location.longtitude=";
+
     var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
     var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
+    var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=35.2270869&location.longitude=-80.8431268&start_date.keyword=this_weekend" + token;
 
     $.ajax({
         url: queryURL,
