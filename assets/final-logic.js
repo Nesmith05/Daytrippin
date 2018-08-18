@@ -244,7 +244,10 @@ function setDestination(){
     // CALL js of all other team members
     eventbrite();
     zomato();
-    weather();gikgit 
+    weather();
+
+    //show results
+    $("#results-page").show();
 
 
 }
@@ -391,6 +394,10 @@ function weather() {
 //////////////////////////////////////////////////////////////
 //////////////////////BEGIN EVENTS////////////////////////////
 //////////////////////////////////////////////////////////////
+
+// Hide results section on page load
+$("#results-page").hide();
+
 
 $("#search-area").on("click", function(event) {
     event.preventDefault();
