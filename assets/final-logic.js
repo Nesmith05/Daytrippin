@@ -374,9 +374,9 @@ $("#search-area").on("click", function(event) {
     event.preventDefault();
     city = $("#city-input").val().trim();
     distanceInput = parseInt($("#distance-input").val().trim());
-    console.log(distanceInput);
+    console.log("Distance (mi)" + distanceInput);
     
-    if(city !='' && distance > 0){
+    if(city !='' && distanceInput > 0){
         $("#possible-results").empty();
         $(".destinationCard").empty();
 
@@ -395,7 +395,7 @@ $("#search-area").on("click", function(event) {
         //     distance = 322;
         // };
         console.log(city);
-        console.log(distance);
+        console.log("Distance (km)" + distance);
         googleGeoCode();
     }
 
