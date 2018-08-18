@@ -16,3 +16,8 @@ table {
 #body {
     width: 100px;
 }
+#top-ten{
+    flex-wrap: wrap;
+    margin: 20px;
+    text-align: center;
+}
