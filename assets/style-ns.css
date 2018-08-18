@@ -9,5 +9,6 @@ table {
 .hero {
     background-color: rgb(38, 98, 226);
     text-align: center;
+    font-family: 'Hi Melody', cursive;
     /* color: white; */
 }
