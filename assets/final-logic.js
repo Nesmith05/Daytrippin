@@ -476,7 +476,7 @@ $(document).ready(function() {
 
 
     // Append train info to table on page
-    $("#possible-results").append("<p>" + "Within "
+    $("#last-searches").append("<p>" + "Within "
     + fbDistance + " Miles of " + v.titleCase(fbCity)
     + "</p>");
     });
