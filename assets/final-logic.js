@@ -1,7 +1,8 @@
 $(document).ready(function() {
-        $("#event-section").hide();
-    $("#city-select").hide();
-    $("#rest-div").hide();
+    // $("#possible-results").hide();
+    $("#weather").hide();
+    $("#zomato-table").hide();
+    $("#results-page").hide();
 
     //////////////////////////////////////////////////////////////
     //////////////////////BEGIN FIREBASE//////////////////////////
