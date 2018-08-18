@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-$(document).ready(function(){
-
-=======
-<<<<<<< HEAD
 $(document).ready(function() {
     // $("#city-select").hide();
     $(".results-container").hide();
@@ -57,63 +52,6 @@ $(document).ready(function() {
     var searchLng;
     var searchLat;
     var north, south, east, west;
-=======
->>>>>>> 9d5572c44b9381e76e7a756c5c580e7128e193f5
-// window.onerror = function() {
-//     alert("Please disable ");
-// };
-//////////////////////////////////////////////////////////////
-//////////////////////BEGIN FIREBASE//////////////////////////
-//////////////////////////////////////////////////////////////
-
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDrbAOcXQwc3wrl38mfUUr5FFIZGy_ctjo",
-    authDomain: "daytrippin-26a14.firebaseapp.com",
-    databaseURL: "https://daytrippin-26a14.firebaseio.com",
-    projectId: "daytrippin-26a14",
-    storageBucket: "daytrippin-26a14.appspot.com",
-    messagingSenderId: "869251076265"
-  };
-  firebase.initializeApp(config);
-
-
-//////////////////////////////////////////////////////////////
-//////////////////////END FIREBASE////////////////////////////
-//////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////
-//////////////////////BEGIN VARIABLES///////////////////////////
-//////////////////////////////////////////////////////////////
-//get nearby cities
-//  1. Take the city entered
-//      -https://maps.googleapis.com/maps/api/geocode/json?address=atlanta&key=AIzaSyBPY1-NPGowiZS7Qh8AlOaUVeNnwWxtjVQ
-//      - VERIFY that the city is in the US
-//  2. create bounding box
-//      - pass in the longitude and latitude as well as the distance into the function 'getBoundingBox'
-//  3. use the bounding box N/S/E/W params to return the cities in the specified distance
-//      http://api.geonames.org/citiesJSON?north=36.44395688601068&south=31.054033913989322&east=-77.38003110725805&west=-83.86342889274196&lang=de&username=nmanderson314
-//  4. store the list of cities for use and display
-//
-var database = firebase.database();
-
-var city;
-var distance=0;
-var distanceInput=0;
-var cityResults = [
-    {
-        resultNum: 0,
-        location: "" ,
-        state: "",
-        lat: "",
-        lng: ""
-    }
-];
-var searchCity;
-var searchLng;
-var searchLat;
-var north, south, east, west;
->>>>>>> fe7793c7344c54ef51415a5c5551bfe680c27b8c
 
     //this is the final destination selected by the user
     var destination;
@@ -402,47 +340,6 @@ var north, south, east, west;
             
     //////////////////////END: NATASHA FUNCTION/////////////////////////
 
-    //////////////////////MATT FUNCTION/////////////////////////
-    function weather() {
-        // var destinationLat = 36.0726355 
-        // var destinationLng = -79.7919754
-        var weatherAPI = "=86e077f1801044c6bf8210536181308";
-        var queryURL = "http://api.apixu.com/v1/forecast.json?key" + weatherAPI + "&q=" + destinationLat + "," + destinationLng + "&days=3";
-
-        $.ajax({
-        url: queryURL,
-        method: "GET"
-        })
-        .then(function (response) {
-            console.log(queryURL);
-            console.log(response);
-
-            $("#date1").append("<h1>" + response.forecast.forecastday[0].date + "</h1>");
-            $("#tempmin1").append(response.forecast.forecastday[0].day.mintemp_f);
-            $("#tempmax1").append(response.forecast.forecastday[0].day.maxtemp_f);
-            $("#condition1").append(response.forecast.forecastday[0].day.condition.text);
-            $("#humidity1").append(response.forecast.forecastday[0].day.avghumidity + "%");
-            
-            $("#date2").append(response.forecast.forecastday[1].date);
-            $("#tempmin2").append(response.forecast.forecastday[1].day.mintemp_f);
-            $("#tempmax2").append(response.forecast.forecastday[1].day.maxtemp_f);
-            $("#condition2").append(response.forecast.forecastday[1].day.condition.text);
-            $("#humidity2").append(response.forecast.forecastday[1].day.avghumidity + "%");
-
-            $("#date3").append(response.forecast.forecastday[2].date);
-            $("#tempmin3").append(response.forecast.forecastday[2].day.mintemp_f);
-            $("#tempmax3").append(response.forecast.forecastday[2].day.maxtemp_f);
-            $("#condition3").append(response.forecast.forecastday[2].day.condition.text);
-            $("#humidity3").append(response.forecast.forecastday[2].day.avghumidity + "%");
-            
-            $("#date1").append("");
-            reminder();
-        });
-
-<<<<<<< HEAD
-        
-//////////////////////END: NATASHA FUNCTION/////////////////////////
-
 //////////////////////MATT FUNCTION/////////////////////////
 function weather() {
     // var destinationLat = 36.0726355 
@@ -490,17 +387,6 @@ function weather() {
      } else {
       $("#message1").append("Don't forget your sunglasses!");
      };
-=======
-
-    var dayonemintemp = response.forecast.forecastday[0].day.mintemp_f;
-    function reminder() {
-        if (dayonemintemp < 80) {
-        $("#message1").append("Don't Forget a jacket!");
-        } else {
-        $("#message1").append("Don't forget your sunglasses!");
-        };
-        };
->>>>>>> 9d5572c44b9381e76e7a756c5c580e7128e193f5
     };
     //////////////////////END: MATT FUNCTION/////////////////////////
 
@@ -561,12 +447,6 @@ function weather() {
         }
     });
 
-
-<<<<<<< HEAD
-    //////////////////////////////////////////////////////////////
-    ////////////////////////FIREBASE PULL/////////////////////////
-    //////////////////////////////////////////////////////////////
-=======
 //////////////////////////////////////////////////////////////
 ////////////////////////FIREBASE PULL/////////////////////////
 //////////////////////////////////////////////////////////////
@@ -605,24 +485,11 @@ $("#possible-results").append("<p>" + "Within "
 //////////////////////////////////////////////////////////////
 
 
->>>>>>> fe7793c7344c54ef51415a5c5551bfe680c27b8c
-
-    //////////////////////////////////////////////////////////////
-    ////////////////////////END: FIREBASE PULL////////////////////
-    //////////////////////////////////////////////////////////////
-
-
 
     //when the user selects one of the cities returned
     $(document).on("click", ".destinationCities", setDestination);
 
-<<<<<<< HEAD
 //////////////////////////////////////////////////////////////
 ////////////////////////END EVENTS////////////////////////////
 //////////////////////////////////////////////////////////////
-=======
-    //////////////////////////////////////////////////////////////
-    ////////////////////////END EVENTS////////////////////////////
-    //////////////////////////////////////////////////////////////
->>>>>>> 9d5572c44b9381e76e7a756c5c580e7128e193f5
 });
