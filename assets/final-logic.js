@@ -204,7 +204,7 @@ function getBoundingBox(centerPoint, distance) {
 };
 
 function geonamesCities(){
-    var queryURL = 'http://api.geonames.org/citiesJSON?north='+north+'&south='+south+'&east='+east+'&west='+west+'&lang=de&username=nmanderson314&maxRows=7';
+    var queryURL = 'https://api.geonames.org/citiesJSON?north='+north+'&south='+south+'&east='+east+'&west='+west+'&lang=de&username=nmanderson314&maxRows=7';
     console.log(queryURL);
 
     $.ajax({
