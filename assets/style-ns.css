@@ -6,3 +6,8 @@ table {
 #body {
     width: 100px;
 }
+.hero {
+    background-color: blue;
+    text-align: center;
+    /* color: white; */
+}
