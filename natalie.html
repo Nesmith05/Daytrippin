@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css"/>
+    <link rel="stylesheet" href="natalie.css"/>
+
+    
+</head>
+<body> 
+    <div class="container is-fluid">
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                <h1 class="title">
+                    Daytrippers
+                </h1>
+                <h2 class="subtitle">
+                    get away for a day!
+                </h2>
+                </div>
+            </div>
+        </section>
+
+        <div id="search-box" class="containter is-fluid">
+            <form id="search-form" class="container">
+                <div class="column is-mobile">
+                    <div class="column">
+                    <label for="city-input" class="search">US City</label>
+                    <input type="text" id="city-input" class="search"> <!--<br>-->
+                    </div>
+                    <div class="column">
+                    <label for="distance-input" class="search">Distance</label>
+                    <input type="number" id="distance-input" class="search"><!--<br>-->
+                    </div>
+                
+                    <button type="button" id="search-area" class="search">Submit</button>
+                </div>
+            </form>
+           
+        </div>
+
+        <div id="possible-results" class="container is-fluid">
+        </div>
+        
+        <div id="top-ten" class = "destinationCard container columns is-parent">
+        </div>
+
+    </div> <!-- END - main container -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="natalie.js"></script>
+</body>
+</html>
