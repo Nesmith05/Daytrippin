@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(document).ready(function() {
     // $("#city-select").hide();
     $(".results-container").hide();
@@ -52,6 +53,62 @@ $(document).ready(function() {
     var searchLng;
     var searchLat;
     var north, south, east, west;
+=======
+// window.onerror = function() {
+//     alert("Please disable ");
+// };
+//////////////////////////////////////////////////////////////
+//////////////////////BEGIN FIREBASE//////////////////////////
+//////////////////////////////////////////////////////////////
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDrbAOcXQwc3wrl38mfUUr5FFIZGy_ctjo",
+    authDomain: "daytrippin-26a14.firebaseapp.com",
+    databaseURL: "https://daytrippin-26a14.firebaseio.com",
+    projectId: "daytrippin-26a14",
+    storageBucket: "daytrippin-26a14.appspot.com",
+    messagingSenderId: "869251076265"
+  };
+  firebase.initializeApp(config);
+
+
+//////////////////////////////////////////////////////////////
+//////////////////////END FIREBASE////////////////////////////
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+//////////////////////BEGIN VARIABLES///////////////////////////
+//////////////////////////////////////////////////////////////
+//get nearby cities
+//  1. Take the city entered
+//      -https://maps.googleapis.com/maps/api/geocode/json?address=atlanta&key=AIzaSyBPY1-NPGowiZS7Qh8AlOaUVeNnwWxtjVQ
+//      - VERIFY that the city is in the US
+//  2. create bounding box
+//      - pass in the longitude and latitude as well as the distance into the function 'getBoundingBox'
+//  3. use the bounding box N/S/E/W params to return the cities in the specified distance
+//      http://api.geonames.org/citiesJSON?north=36.44395688601068&south=31.054033913989322&east=-77.38003110725805&west=-83.86342889274196&lang=de&username=nmanderson314
+//  4. store the list of cities for use and display
+//
+var database = firebase.database();
+
+var city;
+var distance=0;
+var distanceInput=0;
+var cityResults = [
+    {
+        resultNum: 0,
+        location: "" ,
+        state: "",
+        lat: "",
+        lng: ""
+    }
+];
+var searchCity;
+var searchLng;
+var searchLat;
+var north, south, east, west;
+>>>>>>> fe7793c7344c54ef51415a5c5551bfe680c27b8c
 
     //this is the final destination selected by the user
     var destination;
@@ -447,9 +504,50 @@ $(document).ready(function() {
     });
 
 
+<<<<<<< HEAD
     //////////////////////////////////////////////////////////////
     ////////////////////////FIREBASE PULL/////////////////////////
     //////////////////////////////////////////////////////////////
+=======
+//////////////////////////////////////////////////////////////
+////////////////////////FIREBASE PULL/////////////////////////
+//////////////////////////////////////////////////////////////
+////////////// Firebase Storing User Information///////////////
+// Adding Recent searches
+$(".searchBtn").on("click", function (event) {
+    // Preventing Duplicates
+    event.preventDefault();
+
+
+
+// clear text-boxes
+$("#cityInput").val("");
+$("#distanceInput").val("");
+
+
+});
+
+database.ref().limitToLast(5).on("child_added", function (childSnapshot) { console.log(childSnapshot.val());
+
+
+// assign firebase variables to snapshots.
+var fbCity = childSnapshot.val().city;
+var fbDistance = childSnapshot.val().distance;
+
+
+// Append train info to table on page
+$("#possible-results").append("<p>" + "Within "
++ fbDistance + " Miles of " + v.titleCase(fbCity)
++ "</p>");
+
+});
+
+//////////////////////////////////////////////////////////////
+////////////////////////END: FIREBASE PULL////////////////////
+//////////////////////////////////////////////////////////////
+
+
+>>>>>>> fe7793c7344c54ef51415a5c5551bfe680c27b8c
 
     //////////////////////////////////////////////////////////////
     ////////////////////////END: FIREBASE PULL////////////////////
