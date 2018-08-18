@@ -5,12 +5,10 @@
     <title>Hello Bulma!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css"/>
-    <link rel="stylesheet" href="style.css"/>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="assets/voca.js" type="text/javascript"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/style-ns.css" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/final-style.css" />
     <script src="assets/logic-ns.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 
@@ -21,45 +19,31 @@
     <div class="container is-fluid">
         <section class="hero">
             <div class="hero-body">
-                <h1 class="title">
+                <h1 class="title has-text-white">
                     Daytrippers &#9728;  &#9788;
                 </h1>
-                <h2 class="subtitle">
+                <h2 class="subtitle has-text-white">
                     get away for a day!
                 </h2>
             </div>
         </section>
-            <div id="search-box" class="containter is-fluid">
-                <form id="search-form" class="container">
-                    <div class="column is-mobile">
-                        <div class="column">
-                            <label for="city-input" class="search">US City</label>
-                            <input type="text" id="city-input" class="search"> 
-                        </div>
-                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                            <a class="dropdown-item" value="50">
-                                50 miles
-                            </a>
-                            <a class="dropdown-item" value="100">
-                                100 miles
-                            </a>
-                            <a class="dropdown-item" value="150">
-                                150 miles
-                            </a>
-                            <a class="dropdown-item" value="200">
-                                200 miles
-                            </a>
-                            </div>
-                        </div>
-                        </div>
+        <div id="search-box" class="containter is-fluid">
+            <form id="search-form" class="container">
+                <div class="column is-mobile">
+                    <div class="column">
+                    <label for="city-input" class="search">US City</label>
+                    <input type="text" id="city-input" class="search"> <!--<br>-->
+                    </div>
+                    <div class="column">
+                    <label for="distance-input" class="search">Distance</label>
+                    <input type="number" id="distance-input" class="search"><!--<br>-->
                     </div>
                     
-                        <button type="button" id="search-area" class="search">Submit</button>
-                    </div>
-                </form>
-            
-            </div> 
+                    <button type="button" id="search-area" class="search">Submit</button>
+                </div>
+            </form>
+               
+        </div>
         </div>
         <section class="section">
             <div class="container">
@@ -75,6 +59,7 @@
                                                 <th scope="col" id="event-name">Event</th>
                                                 <th scope="col" id="start-time">Start Time</th>
                                                 <th scope="col" id="description">About</th>
+                                                <!-- Events should show here -->
                                             </tr>
                                         </thead>
                                         <tbody id="body">
@@ -85,6 +70,28 @@
                 </div>
             </div>
         </section>
+        <div class="container">
+            <h2>Top 10 Restaurants in the Area</h2>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th scope="col" id="restName">Name</th>
+                  <th scope="col" id="restAddress">Address</th>
+                  <th scope="col" id="restCuisine">Cuisine</th>
+                </tr>
+              </thead>
+              <tbody id="body">
+                <!-- Restuarant rows will appear here -->
+              </tbody>
+            </table>
+          </div> 
+
+
+        <div id="possible-results" class="container is-fluid">
+        </div>
+        
+        <div id="top-ten" class = "destinationCard container columns is-parent">
+        </div>
         <!-- <br>
         <br>
         <div class="container" id="search-bar">
@@ -100,7 +107,6 @@
 
     </div> <!-- END - main container -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="return-cities.js"></script>
-    <script src="dropdown.js"></script>
+    <script src="assets/return-cities.js"></script>
 </body>
 </html>
