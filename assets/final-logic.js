@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    // $("#possible-results").hide();
+    $("#possible-results").hide();
+    $("#top-ten").hide();
     $("#weather").hide();
     $("#zomato-table").hide();
     $("#results-page").hide();
@@ -447,7 +448,9 @@ $(document).ready(function() {
                 city: city,
                 distance: distanceInput, 
             });
-
+            $("#possible-results").show();
+            $("#top-ten").show();
+            $("#results-page").show();
         }
         else {
             $("#possible-results").empty();
