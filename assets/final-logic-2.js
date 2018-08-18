@@ -1,8 +1,6 @@
 $(document).ready(function() {
-        $("#event-section").hide();
-    $("#city-select").hide();
-    $("#rest-div").hide();
-
+    // $("#city-select").hide();
+    $(".results-container").hide();
     //////////////////////////////////////////////////////////////
     //////////////////////BEGIN FIREBASE//////////////////////////
     //////////////////////////////////////////////////////////////
@@ -252,7 +250,7 @@ $(document).ready(function() {
         weather();
 
         //show results
-        // $("#results-page").show();
+        $("#results-page").show();
 
 
     }
@@ -302,9 +300,8 @@ $(document).ready(function() {
     function eventbrite () {
 
         var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
-        // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
-        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng; + token;
-
+        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
+        // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + token;
 
         $.ajax({
             url: queryURL,
@@ -407,6 +404,7 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
 
     // Hide results section on page load
+    // $("#results-page").hide();
 
 
     $("#search-area").on("click", function(event) {
