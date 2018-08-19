@@ -140,7 +140,7 @@ $(document).ready(function() {
         console.log(searchCity);
         console.log(searchLat);
         console.log(searchLng);
-        
+        $("#possible-results").empty();
         console.log("Accepted search of user: (["+searchLat+", "+searchLng+"], "+distance+")");
         getBoundingBox([searchLat,searchLng],distance);
     };
