@@ -28,8 +28,10 @@ table {
     margin: 20px;
 }
 .notification.is-primary {
-    background-color: rgb(85, 136, 246);
-    color: #fff;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 3px rgb(51, 116, 255), 0 0 0 1px rgb(51, 116, 255);
+    color: #4a4a4a;
 }
 
 .columns.is-centered {
@@ -40,12 +42,6 @@ table {
     padding: 20px;
 }
 
-#search-box{
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-    color: #4a4a4a;
-}
 #table-event {
     width: 700px;
     margin-left: 30px;
