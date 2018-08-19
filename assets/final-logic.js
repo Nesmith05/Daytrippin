@@ -42,8 +42,8 @@ $(document).ready(function() {
     var database = firebase.database();
 
     var city;
-    var distance=0;
     var distanceInput=0;
+    var distance=0;
     var cityResults = [
         {
             resultNum: 0,
@@ -71,6 +71,8 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
     //////////////////////BEGIN FUNCTIONS/////////////////////////
     //////////////////////////////////////////////////////////////
+    
+    //////////////////////NATALIE FUNCTION/////////////////////////
     function miToKmConvert(){
         // 1 mi, mi(Int) = 1.609344 km
         // 15 mi, mi(Int) = 15 × 1.609344 km = 24.14016 km
@@ -90,16 +92,18 @@ $(document).ready(function() {
         .then(function(response) {
             console.log(response.results);
             console.log(response.results.length);
+            
+    //  Need to collect the country & ensure entering US country
+                    //Could check the last 3 chars of the formatted_address?
+                    //ex:   "formatted_address": "Atlanta, GA, USA",
+
+            //HANDLE RETURN OF MULTIPLE CITIES
             if(response.results.length > 1){
                 cityResults=[];
                 for (var i = 0; i < response.results.length;i++){
                     returnedCity = response.results[i].formatted_address;
                     returnedLat = response.results[i].geometry.location.lat;
                     returnedLng = response.results[i].geometry.location.lng;
-
-    //  Need to collect the country & ensure entering US country
-                    //Could check the last 3 chars of the formatted_address?
-                    //ex:   "formatted_address": "Atlanta, GA, USA",
 
                     function addResult(resultNum, location, lat, lng){
                         cityResults.push({resultNum, location, lat, lng})
@@ -108,10 +112,10 @@ $(document).ready(function() {
                     addResult(i, returnedCity, returnedLat, returnedLng);
                     
                     //create a clickable object for each city
-                    $("#possible-results").prepend("<a href='#'>" + returnedCity+ "</a><br>");
-
+                    $("#possible-results").prepend("<a href='#' id='multi-Results' city='"+returnedCity+"' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
                 }
             }
+            //ONLY ONE CITY RETURNED
             else if(response.results.length === 1){
                 searchCity = response.results[0].formatted_address;
                 searchLat = response.results[0].geometry.location.lat;
@@ -119,10 +123,26 @@ $(document).ready(function() {
                 
                 getBoundingBox([searchLat,searchLng],distance);
             }
+            //NOTHING RETURNED - USER INPUT VALIDATION
             else{
                 $("#possible-results").append("That search returned no results. Please try again.");
             }
         });
+    };
+
+    function citySelect(){
+        var citySearchLink = $(this);
+        console.log(this);
+        parseInt($("#distance-input").val().trim());
+        searchCity = citySearchLink.attr("city");
+        searchLat =  parseInt(citySearchLink.attr("lat"))
+        searchLng = parseInt(citySearchLink.attr("lng"));
+        console.log(searchCity);
+        console.log(searchLat);
+        console.log(searchLng);
+        $("#possible-results").empty();
+        console.log("Accepted search of user: (["+searchLat+", "+searchLng+"], "+distance+")");
+        getBoundingBox([searchLat,searchLng],distance);
     };
 
     //*******************************************************
@@ -144,6 +164,7 @@ $(document).ready(function() {
 
 
     function getBoundingBox(centerPoint, distance) {
+        console.log("getBoundingBox Function Executed")
         console.log(centerPoint);
         console.log(distance);
         var MIN_LAT, MAX_LAT, MIN_LON, MAX_LON, R, radDist, degLat, degLon, radLat, radLon, deltaLon,minLat, maxLat, minLon, maxLon;
@@ -235,7 +256,6 @@ $(document).ready(function() {
                     if(city.toUpperCase() != destinationOption.toUpperCase()){             
                         //create a box object for each city returned
                         $("#top-ten").append("<div class='card column is-4 destinationCities' lat = '"+selectedLat+"' lng = '"+selectedLng+"'  cityName='" + destinationOption + "'><div class='card-header-title is-centered'>"+ destinationOption + "</div></div>");
-
                     };
                 }
             }
@@ -268,6 +288,7 @@ $(document).ready(function() {
 
 
     }
+    //////////////////////END NATALIE FUNCTION/////////////////////////
 
     function clearResults() {
         $("#body").empty();
@@ -275,37 +296,40 @@ $(document).ready(function() {
     }
 
     //////////////////////NAKELL FUNCTION/////////////////////////
-
     function zomato(){
         var cities = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://developers.zomato.com/api/v2.1/cities?" + destinationLat +"&"+ destinationLng,
-        "method": "GET",
-        "headers": {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://developers.zomato.com/api/v2.1/cities?lat=" + destinationLat +"&lon="+ destinationLng,
+          
+          "method": "GET",
+          "headers": {
             "user-key": "c7288644a7a1a0bb320b8e22c80479c6",
-        }
+          }
+          
         }
         
         $.ajax(cities).done(function (response) {
-            console.log(cities.url);
-        // console.log(response);
-        var cityID = response.location_suggestions[0].id;
-        var restuarant = {
+         console.log(response.location_suggestions[0].id);
+         console.log(response);
+          var cityID = response.location_suggestions[0].id;
+          // console.log(cityID);
+          var restuarant = {
             "async": true,
             "crossDomain": true,
             "url": `https://developers.zomato.com/api/v2.1/search?entity_id=${cityID}&entity_type=city&count=10&sort=rating&order=desc`,
             "method": "GET",
             "headers": {
-            "user-key": "c7288644a7a1a0bb320b8e22c80479c6"
+              "user-key": "c7288644a7a1a0bb320b8e22c80479c6",
+              
             }
-        }
-        
-        $.ajax(restuarant).done(function (response) {
-            console.log(response.restaurants);
+          }
+          
+          $.ajax(restuarant).done(function (response) {
+            // console.log(response.restaurants);
             var list=response.restaurants;
             list.forEach(element => {
-            console.log(element.restaurant.name)
+              // console.log(element.restaurant.name)
         
             $("#zomato-body").append("<tr><td>" +  element.restaurant.name+ "</td><td>" + element.restaurant.location.address + "</td><td>"  + element.restaurant.cuisines );
             });
@@ -428,8 +452,6 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
 
     // Hide results section on page load
-
-
     $("#search-area").on("click", function(event) {
         event.preventDefault();
         city = $("#city-input").val().trim();
@@ -439,23 +461,12 @@ $(document).ready(function() {
         if(city !='' && distanceInput > 0){
             $("#possible-results").empty();
             $(".destinationCard").empty();
-
             //convert distance from miles to km - set list of selected ranges because some of the search apis only accept up to 400km
             miToKmConvert();
-            // if (distance == 50){
-            //     distance = 81;
-            // }
-            // else if (distance == 100){
-            //     distance = 161;
-            // }
-            // else if (distance == 150){
-            //     distance = 242;
-            // }
-            // else{
-            //     distance = 322;
-            // };
+            
             console.log(city);
             console.log("Distance (km)" + distance);
+            
             googleGeoCode();
 
             //add to firebase
@@ -474,6 +485,10 @@ $(document).ready(function() {
             $("#possible-results").append("Please enter required information.");
         }
     });
+//if user were to click on links of multiple cities
+$(document).on("click", "#multi-Results", citySelect);
+
+
 
     //////////////////////////////////////////////////////////////
     ////////////////////////FIREBASE PULL/////////////////////////
@@ -483,23 +498,15 @@ $(document).ready(function() {
     $(".searchBtn").on("click", function (event) {
         // Preventing Duplicates
         event.preventDefault();
-
-
-
-    // clear text-boxes
-    $("#cityInput").val("");
-    $("#distanceInput").val("");
-
-
+        // clear text-boxes
+        $("#cityInput").val("");
+        $("#distanceInput").val("");
     });
 
     database.ref().limitToLast(5).on("child_added", function (childSnapshot) { console.log(childSnapshot.val());
-
-
     // assign firebase variables to snapshots.
     var fbCity = childSnapshot.val().city;
     var fbDistance = childSnapshot.val().distance;
-
 
     // Append train info to table on page
     $("#last-searches").prepend("<p id='firebase-return'>" + "Within "
@@ -510,7 +517,6 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
     ////////////////////////END: FIREBASE PULL////////////////////
     //////////////////////////////////////////////////////////////
-
 
 
     //when the user selects one of the cities returned
