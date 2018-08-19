@@ -31,3 +31,7 @@ table {
     background-color: #1fc4d5;
     color: #fff;
 }
+
+.columns.is-centered {
+    justify-content: center;
+}
