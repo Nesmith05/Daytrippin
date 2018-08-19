@@ -4,6 +4,7 @@ $(document).ready(function() {
     $("#weather").hide();
     $("#zomato-table").hide();
     $("#results-page").hide();
+    $("#the-results").hide();
 
     //////////////////////////////////////////////////////////////
     //////////////////////BEGIN FIREBASE//////////////////////////
@@ -257,8 +258,8 @@ $(document).ready(function() {
         weather();
 
         //show results
+        $("#the-results").show();
         $("#results-page").show();
-        // $("#results-page").show();
 
 
     }
