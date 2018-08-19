@@ -34,7 +34,9 @@ table {
     box-shadow: 0 2px 3px rgb(51, 116, 255), 0 0 0 1px rgb(51, 116, 255);
     color: #4a4a4a;
 }
-
+#firebase-return {
+    font-size: 18px;
+}
 .columns.is-centered {
     justify-content: center;
 }

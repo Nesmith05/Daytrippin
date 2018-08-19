@@ -489,7 +489,7 @@ $(document).ready(function() {
 
 
     // Append train info to table on page
-    $("#last-searches").prepend("<p>" + "Within "
+    $("#last-searches").prepend("<p id='firebase-return'>" + "Within "
     + fbDistance + " Miles of " + v.titleCase(fbCity)
     + "</p>");
     });
