@@ -1,6 +1,5 @@
 .hero {
-    background-color: rgb(38, 98, 226);
-    text-align: center;
+    background-color: rgb(51, 116, 255);
     /* color: white; */
 }
 body{
@@ -24,4 +23,8 @@ table {
 
 #searches{
     margin: 20px;
+}
+.notification.is-primary {
+    background-color: #1fc4d5;
+    color: #fff;
 }
