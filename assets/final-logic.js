@@ -279,6 +279,8 @@ $(document).ready(function() {
         });
     };
 
+
+
     function setDestination(){
         var destinationBox = $(this);
         console.log(this);
@@ -297,8 +299,18 @@ $(document).ready(function() {
         //show results
         $("#the-results").show();
         $("#results-page").show();
+        $(".destinationCities").on("click", clearResults());
+
+       
+
+
     }
     //////////////////////END NATALIE FUNCTION/////////////////////////
+
+    function clearResults() {
+        $("#body").empty();
+        // $("#zomato-body").empty();
+    }
 
     //////////////////////NAKELL FUNCTION/////////////////////////
     function zomato(){
@@ -350,7 +362,7 @@ $(document).ready(function() {
 
         var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
         // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
-        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + "&location.within=50mi" + token;
+        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + "&location.within=" + distanceInput + "mi" + token;
         console.log(queryURL);
 
         $.ajax({
@@ -379,6 +391,7 @@ $(document).ready(function() {
                 $("#body").append("<tr><td>" + "<a href=" + uRl +">" + eventName + "</a>" + "<td>" + moment(eventStart).format("llll") + " - " + moment(eventEnd).format("llll") + "<td>" +v.prune(eventDesc, 150));
                 //   $("<a>" + elink )
                 
+                
                     // console.log(categories);
                     // if (categories == "103", "101") {
                     //     response.events[i].hide();
@@ -386,6 +399,7 @@ $(document).ready(function() {
                 }
             // }
         });
+       
     };
 
             
@@ -480,6 +494,7 @@ $(document).ready(function() {
             });
             $("#possible-results").show();
             $("#top-ten").show();
+            
            
         }
         else {
