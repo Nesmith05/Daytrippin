@@ -257,6 +257,7 @@ $(document).ready(function() {
         weather();
 
         //show results
+        $("#results-page").show();
         // $("#results-page").show();
 
 
@@ -450,7 +451,7 @@ $(document).ready(function() {
             });
             $("#possible-results").show();
             $("#top-ten").show();
-            $("#results-page").show();
+           
         }
         else {
             $("#possible-results").empty();
