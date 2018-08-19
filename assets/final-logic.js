@@ -309,7 +309,7 @@ $(document).ready(function() {
 
         var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
         // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
-        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + token;
+        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + "&location.within=50mi" + token;
         console.log(queryURL);
 
         $.ajax({
