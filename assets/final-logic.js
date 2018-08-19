@@ -42,8 +42,8 @@ $(document).ready(function() {
     var database = firebase.database();
 
     var city;
-    var distance=0;
     var distanceInput=0;
+    var distance=0;
     var cityResults = [
         {
             resultNum: 0,
@@ -71,6 +71,8 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
     //////////////////////BEGIN FUNCTIONS/////////////////////////
     //////////////////////////////////////////////////////////////
+    
+    //////////////////////NATALIE FUNCTION/////////////////////////
     function miToKmConvert(){
         // 1 mi, mi(Int) = 1.609344 km
         // 15 mi, mi(Int) = 15 × 1.609344 km = 24.14016 km
@@ -108,8 +110,7 @@ $(document).ready(function() {
                     addResult(i, returnedCity, returnedLat, returnedLng);
                     
                     //create a clickable object for each city
-                    $("#possible-results").prepend("<a href='#'>" + returnedCity+ "</a><br>");
-
+                    $("#possible-results").prepend("<a href='#' id='multResults' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
                 }
             }
             else if(response.results.length === 1){
@@ -260,9 +261,8 @@ $(document).ready(function() {
         //show results
         $("#the-results").show();
         $("#results-page").show();
-
-
     }
+    //////////////////////END NATALIE FUNCTION/////////////////////////
 
     //////////////////////NAKELL FUNCTION/////////////////////////
 
@@ -279,7 +279,7 @@ $(document).ready(function() {
         
         $.ajax(cities).done(function (response) {
             console.log(cities.url);
-        // console.log(response);
+        console.log(response);
         var cityID = response.location_suggestions[0].id;
         var restuarant = {
             "async": true,
@@ -416,8 +416,6 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
 
     // Hide results section on page load
-
-
     $("#search-area").on("click", function(event) {
         event.preventDefault();
         city = $("#city-input").val().trim();
@@ -430,20 +428,10 @@ $(document).ready(function() {
 
             //convert distance from miles to km - set list of selected ranges because some of the search apis only accept up to 400km
             miToKmConvert();
-            // if (distance == 50){
-            //     distance = 81;
-            // }
-            // else if (distance == 100){
-            //     distance = 161;
-            // }
-            // else if (distance == 150){
-            //     distance = 242;
-            // }
-            // else{
-            //     distance = 322;
-            // };
+            
             console.log(city);
             console.log("Distance (km)" + distance);
+            
             googleGeoCode();
 
             //add to firebase
@@ -461,6 +449,9 @@ $(document).ready(function() {
             $("#possible-results").append("Please enter required information.");
         }
     });
+//if user were to click on links of multiple cities
+    
+
 
     //////////////////////////////////////////////////////////////
     ////////////////////////FIREBASE PULL/////////////////////////
@@ -470,23 +461,15 @@ $(document).ready(function() {
     $(".searchBtn").on("click", function (event) {
         // Preventing Duplicates
         event.preventDefault();
-
-
-
-    // clear text-boxes
-    $("#cityInput").val("");
-    $("#distanceInput").val("");
-
-
+        // clear text-boxes
+        $("#cityInput").val("");
+        $("#distanceInput").val("");
     });
 
     database.ref().limitToLast(5).on("child_added", function (childSnapshot) { console.log(childSnapshot.val());
-
-
     // assign firebase variables to snapshots.
     var fbCity = childSnapshot.val().city;
     var fbDistance = childSnapshot.val().distance;
-
 
     // Append train info to table on page
     $("#last-searches").prepend("<p id='firebase-return'>" + "Within "
