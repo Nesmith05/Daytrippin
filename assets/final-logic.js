@@ -92,16 +92,18 @@ $(document).ready(function() {
         .then(function(response) {
             console.log(response.results);
             console.log(response.results.length);
+            
+    //  Need to collect the country & ensure entering US country
+                    //Could check the last 3 chars of the formatted_address?
+                    //ex:   "formatted_address": "Atlanta, GA, USA",
+
+            //HANDLE RETURN OF MULTIPLE CITIES
             if(response.results.length > 1){
                 cityResults=[];
                 for (var i = 0; i < response.results.length;i++){
                     returnedCity = response.results[i].formatted_address;
                     returnedLat = response.results[i].geometry.location.lat;
                     returnedLng = response.results[i].geometry.location.lng;
-
-    //  Need to collect the country & ensure entering US country
-                    //Could check the last 3 chars of the formatted_address?
-                    //ex:   "formatted_address": "Atlanta, GA, USA",
 
                     function addResult(resultNum, location, lat, lng){
                         cityResults.push({resultNum, location, lat, lng})
@@ -110,9 +112,10 @@ $(document).ready(function() {
                     addResult(i, returnedCity, returnedLat, returnedLng);
                     
                     //create a clickable object for each city
-                    $("#possible-results").prepend("<a href='#' id='multResults' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
+                    $("#possible-results").prepend("<a href='#' id='multi-Results' city='"+returnedCity+"' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
                 }
             }
+            //ONLY ONE CITY RETURNED
             else if(response.results.length === 1){
                 searchCity = response.results[0].formatted_address;
                 searchLat = response.results[0].geometry.location.lat;
@@ -120,10 +123,26 @@ $(document).ready(function() {
                 
                 getBoundingBox([searchLat,searchLng],distance);
             }
+            //NOTHING RETURNED - USER INPUT VALIDATION
             else{
                 $("#possible-results").append("That search returned no results. Please try again.");
             }
         });
+    };
+
+    function citySelect(){
+        var citySearchLink = $(this);
+        console.log(this);
+        parseInt($("#distance-input").val().trim());
+        searchCity = citySearchLink.attr("city");
+        searchLat =  parseInt(citySearchLink.attr("lat"))
+        searchLng = parseInt(citySearchLink.attr("lng"));
+        console.log(searchCity);
+        console.log(searchLat);
+        console.log(searchLng);
+        
+        console.log("Accepted search of user: (["+searchLat+", "+searchLng+"], "+distance+")");
+        getBoundingBox([searchLat,searchLng],distance);
     };
 
     //*******************************************************
@@ -145,6 +164,7 @@ $(document).ready(function() {
 
 
     function getBoundingBox(centerPoint, distance) {
+        console.log("getBoundingBox Function Executed")
         console.log(centerPoint);
         console.log(distance);
         var MIN_LAT, MAX_LAT, MIN_LON, MAX_LON, R, radDist, degLat, degLon, radLat, radLon, deltaLon,minLat, maxLat, minLon, maxLon;
@@ -236,7 +256,6 @@ $(document).ready(function() {
                     if(city.toUpperCase() != destinationOption.toUpperCase()){             
                         //create a box object for each city returned
                         $("#top-ten").append("<div class='card column is-4 destinationCities' lat = '"+selectedLat+"' lng = '"+selectedLng+"'  cityName='" + destinationOption + "'><div class='card-header-title is-centered'>"+ destinationOption + "</div></div>");
-
                     };
                 }
             }
@@ -428,7 +447,6 @@ $(document).ready(function() {
         if(city !='' && distanceInput > 0){
             $("#possible-results").empty();
             $(".destinationCard").empty();
-
             //convert distance from miles to km - set list of selected ranges because some of the search apis only accept up to 400km
             miToKmConvert();
             
@@ -453,7 +471,8 @@ $(document).ready(function() {
         }
     });
 //if user were to click on links of multiple cities
-    
+$(document).on("click", "#multi-Results", citySelect);
+
 
 
     //////////////////////////////////////////////////////////////
@@ -483,7 +502,6 @@ $(document).ready(function() {
     //////////////////////////////////////////////////////////////
     ////////////////////////END: FIREBASE PULL////////////////////
     //////////////////////////////////////////////////////////////
-
 
 
     //when the user selects one of the cities returned
