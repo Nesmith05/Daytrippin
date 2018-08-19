@@ -309,8 +309,8 @@ $(document).ready(function() {
 
         var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
         // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
-        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng; + token;
-
+        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + token;
+        console.log(queryURL);
 
         $.ajax({
             url: queryURL,
@@ -337,10 +337,10 @@ $(document).ready(function() {
                 $("#body").append("<tr><td>" + "<a href=" + uRl +">" + eventName + "</a>" + "<td>" + moment(eventStart).format("llll") + " - " + moment(eventEnd).format("llll") + "<td>" +v.prune(eventDesc, 150));
                 //   $("<a>" + elink )
                 
-                    console.log(categories);
-                    if (categories == "103", "101") {
-                        response.events[i].hide();
-                    }
+                    // console.log(categories);
+                    // if (categories == "103", "101") {
+                    //     response.events[i].hide();
+                    // }
                 }
             // }
         });
