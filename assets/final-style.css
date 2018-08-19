@@ -26,6 +26,7 @@ table {
 
 #searches{
     margin: 20px;
+    margin-left: 50px;
 }
 .notification.is-primary {
     background-color: #1fc4d5;
