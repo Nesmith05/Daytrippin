@@ -107,7 +107,7 @@ $(document).ready(function() {
                     addResult(i, returnedCity, returnedLat, returnedLng);
                     
                     //create a clickable object for each city
-                    $("#possible-results").append("<a href='#'>" + returnedCity+ "</a><br>");
+                    $("#possible-results").prepend("<a href='#'>" + returnedCity+ "</a><br>");
 
                 }
             }
@@ -486,7 +486,7 @@ $(document).ready(function() {
 
 
     // Append train info to table on page
-    $("#last-searches").append("<p>" + "Within "
+    $("#last-searches").prepend("<p>" + "Within "
     + fbDistance + " Miles of " + v.titleCase(fbCity)
     + "</p>");
     });
