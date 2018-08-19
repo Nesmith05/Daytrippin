@@ -72,12 +72,11 @@ $(document).ready(function() {
     //////////////////////BEGIN FUNCTIONS/////////////////////////
     //////////////////////////////////////////////////////////////
     
-    //////////////////////NATALIE FUNCTION/////////////////////////
+    //////////////////////NATALIE FUNCTIONS/////////////////////////
     function miToKmConvert(){
         // 1 mi, mi(Int) = 1.609344 km
         // 15 mi, mi(Int) = 15 × 1.609344 km = 24.14016 km
         distance = distanceInput * 1.609344
-
     }
 
 
@@ -105,14 +104,20 @@ $(document).ready(function() {
                     returnedLat = response.results[i].geometry.location.lat;
                     returnedLng = response.results[i].geometry.location.lng;
 
-                    function addResult(resultNum, location, lat, lng){
-                        cityResults.push({resultNum, location, lat, lng})
-                    };
-
-                    addResult(i, returnedCity, returnedLat, returnedLng);
+                    console.log("Country: " + returnedCity.substring(returnedCity.length - 3));
+                    var country3Char = returnedCity.substring(returnedCity.length - 3);
                     
-                    //create a clickable object for each city
-                    $("#possible-results").prepend("<a href='#' id='multi-Results' city='"+returnedCity+"' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
+                    //user validation - must be a us city.Google API always returns "USA" as last 3 characters for all US cities
+                    if(country3Char === "USA"){
+                        function addResult(resultNum, location, lat, lng){
+                            cityResults.push({resultNum, location, lat, lng})
+                        };
+
+                        addResult(i, returnedCity, returnedLat, returnedLng);
+                        
+                        //create a clickable object for each city. 
+                        $("#possible-results").prepend("<a href='#' id='multi-Results' city='"+returnedCity+"' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
+                    }
                 }
             }
             //ONLY ONE CITY RETURNED
@@ -121,10 +126,22 @@ $(document).ready(function() {
                 searchLat = response.results[0].geometry.location.lat;
                 searchLng = response.results[0].geometry.location.lng;
                 
+                console.log("Country: " + searchCity.substring(searchCity.length - 3));
+                var country3Char = searchCity.substring(searchCity.length - 3);
+                
+            //user validation - must be a us city.Google API always returns "USA" as last 3 characters for all US cities
+            //cannot be a function with out creating additional functions
+                if(country3Char === "USA"){
                 getBoundingBox([searchLat,searchLng],distance);
+                }
+                else{
+                    $("#possible-results").empty();
+                    $("#possible-results").append("That search returned no results within the USA. Please try again.");
+                }
             }
             //NOTHING RETURNED - USER INPUT VALIDATION
             else{
+                $("#possible-results").empty();
                 $("#possible-results").append("That search returned no results. Please try again.");
             }
         });
@@ -453,6 +470,7 @@ $(document).ready(function() {
             console.log(city);
             console.log("Distance (km)" + distance);
             
+            //USE GOOGLE API TO GET COORDINATES OF SEARCH CITY + VALIDATION
             googleGeoCode();
 
             //add to firebase
