@@ -102,102 +102,92 @@
         </div>
 <!-- MULTIPLE CITY SELECTION END -->
 
-        <div id="results-page">
-                <!-- RESULTS PAGE -->
-            <section class="section" id="event-section">
-                <div class="container">
-                    <h1 class="title">
-                        Here are your results!
-                    </h1>
-                    <div="columns">
-                        <div="column is-8 is-offset-2">
-                            <ul id="event-name">
-                                <table class="table table is-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" id="event-name">Event</th>
-                                            <th scope="col" id="start-time">Start Time</th>
-                                            <th scope="col" id="description">About</th>
-                                            <!-- Events should show here -->
-                                        </tr>
-                                    </thead>
-                                    <tbody id="body">
-                                    </tbody>
-                                </table>
-                            </ul>
+<div class="tile is-ancestor">
+        <div class="tile is-4 is-vertical is-parent">
+          <div class="tile is-child box">
+            <p class="title">One</p>
+            <div class="column">
+                <div class="card" id="weather1">
+                    <div class="card-content">
+                        <div id="day1">
+                            <div id="condition1"></div>
+                            <div id="tempmin1"></div>
+                            <div id="tempmax1"></div>
+                            <div id="message1"></div>
+                            <div id="date1"></div>
                         </div>
                     </div>
                 </div>
-            </section>
-<!-- RESULTS PAGE END -->
+            </div>
 
-<!-- RESTAURANT RESULTS -->
-            <div class="container" id="zomato-table">
-                <h2>Top 10 Restaurants in the Area</h2>
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-half" id="zomato">
+            <div class="column">
+                <div class="card" id="weather2">
+                    <div class="card-content">
+                        <div id="day2">
+                            <div id="condition2"></div>
+                            <div id="tempmin2"></div>
+                            <div id="tempmax2"></div>
+                            <div id="message2"></div>
+                            <div id="date2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card" id="weather3">
+                    <div class="card-content">
+                        <div id="day3">
+                            <div id="condition3"></div>
+                            <div id="tempmin3"></div>
+                            <div id="tempmax3"></div>
+                            <div id="humidity3"></div>
+                            <div id="message3"></div>
+                            <div id="date3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+            <div class="tile is-child box">
+                <div class="column">
+                    <p class="title">Two</p>
+                    <h2>Top 10 Restaurants in the Area</h2>
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-half" id="zomato">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id="restName">Name</th>
+                                    <th scope="col" id="restAddress">Address</th>
+                                    <th scope="col" id="restCuisine">Cuisine</th>
+                                </tr>
+                            </thead>
+                            <tbody id="zomato-body">
+                                <!-- Restuarant rows will appear here -->
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent" id="results-page">
+          <div class="tile is-child box">
+            <p class="title">Your Results</p>
+            <ul id="event-name">
+                <table class="table table is-bordered">
                     <thead>
                         <tr>
-                        <th scope="col" id="restName">Name</th>
-                        <th scope="col" id="restAddress">Address</th>
-                        <th scope="col" id="restCuisine">Cuisine</th>
+                            <th scope="col" id="event-name">Event</th>
+                            <th scope="col" id="start-time">Start Time</th>
+                            <th scope="col" id="description">About</th>
+                            <!-- Events should show here -->
                         </tr>
                     </thead>
-                    <tbody id="zomato-body">
-                        <!-- Restuarant rows will appear here -->
+                    <tbody id="body">
                     </tbody>
                 </table>
-            </div> 
-<!-- RESTAURANT RESULTS END -->
-
-<!-- WEATHER PAGE -->
-            <div class="is-half">
-                <div class="columns" id="weather">
-                    <div class="column is-half"></div>
-                    <div class="column">
-                        <div class="card" id="weather1">
-                            <div class="card-content">
-                                <div id="day1">
-                                    <div id="condition1"></div>
-                                    <div id="tempmin1"></div>
-                                    <div id="tempmax1"></div>
-                                    <div id="message1"></div>
-                                    <div id="date1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="card" id="weather2">
-                            <div class="card-content">
-                                <div id="day2">
-                                    <div id="condition2"></div>
-                                    <div id="tempmin2"></div>
-                                    <div id="tempmax2"></div>
-                                    <div id="message2"></div>
-                                    <div id="date2"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="column">
-                        <div class="card" id="weather3">
-                            <div class="card-content">
-                                <div id="day3">
-                                    <div id="condition3"></div>
-                                    <div id="tempmin3"></div>
-                                    <div id="tempmax3"></div>
-                                    <div id="humidity3"></div>
-                                    <div id="message3"></div>
-                                    <div id="date3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end of div id = "weather"-->
-         </div>
-        </div> <!--end of div id = "results-page"-->
+            </ul>
+          </div>
+        </div>
+    </div>
 
     </div><!--end of main section container-fluid -->
 

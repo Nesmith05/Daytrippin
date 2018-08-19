@@ -330,6 +330,7 @@ $(document).ready(function() {
                     var eventEnd = response.events[i].end.local; //convert military time
                     console.log(eventEnd);
                     var eventDesc = response.events[i].description.text;
+                    // var Description = eventDesc.css("font-size", "12px" );
                     console.log(v.prune(eventDesc, 150));
                     var uRl = response.events[i].url;
                     console.log(uRl);

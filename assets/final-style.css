@@ -35,3 +35,7 @@ table {
 .columns.is-centered {
     justify-content: center;
 }
+
+#results-page {
+    padding: 20px;
+}
