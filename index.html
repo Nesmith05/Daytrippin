@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Daytrippin'!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Hi+Melody" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css"/>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="assets/voca.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/final-style.css" />
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    
+</head>
+<body> 
+    <div class="container is-fluid">
+        <!-- HEADER -->
+        <section class="hero">
+            <div class="hero-body">
+                <h1 class="title has-text-white">
+                    Daytrippin' &#9728;  &#9788;
+                </h1>
+                <h2 class="subtitle has-text-white">
+                    get away for a day!
+                </h2>
+            </div>
+        </section>
+            <!-- HEADER END -->
+            <!-- SEARCH BOX -->
+        <div id = "searches" class="columns">
+            <!-- <div id="search-box" class="column is-4 is-offset-2">
+                <form id="search-form" class="columns">
+                        <div class="column is-5">
+                            <label for="city-input" class="search">US City</label>
+                            <input type="text" id="city-input" class="search" placeholder="Oh, the places you'll go!"> 
+                        </div>
+                        <div class="column is-4">
+                            <label for="distance-input" class="search">Distance</label>
+                            <input type="number" id="distance-input" class="search" min="50" max="200">
+                        </div>
+                        <div class="column is-1">
+                            <button type="button" id="search-area" class="search">Submit</button>
+                        </div>
+                </form>  
+                <div id="possible-results" class="container is-fluid">
+                </div>  
+            </div> -->
+            <div class="tile is-ancestor column" id = "searches">
+                    <div class="tile is-vertical columns">
+                        <div class="tile">
+                            <div class="tile is-parent is-vertical">
+                              <article class="tile is-child notification is-primary" id="search-box">
+                                <p class="title">Search for nearby cities</p>
+                                <form id="search-form" class="columns">
+                                        <div class="column is-5">
+                                            <label for="city-input" class="search">US City</label>
+                                            <input type="text" id="city-input" class="search" placeholder="Oh, the places you'll go!"> 
+                                        </div>
+                                        <div class="column is-4">
+                                            <label for="distance-input" class="search">Distance</label>
+                                            <input type="number" id="distance-input" class="search" min="50" max="200">
+                                        </div>
+                                        <div class="column is-1">
+                                            <button type="button" id="search-area" class="search">Submit</button>
+                                        </div>
+                                </form>  
+                                <div id="possible-results" class="container is-fluid">
+                                </div>  
+                              </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical is-10 is-offset-2">
+                    <div class="tile">
+                        <div class="tile is-parent is-vertical">
+                          <article class="tile is-child notification is-primary">
+                            <p class="title">Others are searching for</p>
+                            <p class="subtitle" id="last-searches"></p>
+                          </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="column tile is-4">
+                <div><h6><strong>Others are looking at traveling...</strong></h6><br></div>
+                <div id="last-searches">
+                </div>
+            </div> -->
+        </div>
+           <!-- SEARCH BOX END -->
+       
+<!-- MULTIPLE CITY SELECTION -->
+        
+
+        <div id="top-ten" class = "destinationCard container columns is-parent">
+            
+        </div>
+<!-- MULTIPLE CITY SELECTION END -->
+
+<div class="tile is-ancestor" id="the-results">
+        <div class="tile is-4 is-vertical is-parent">
+          <div class="tile is-child box" id="weather-tile">
+            <p class="title">One</p>
+            <div class="column">
+                <div class="card" id="weather1">
+                    <div class="card-content">
+                        <div id="day1">
+                            <div id="condition1"></div>
+                            <div id="tempmin1"></div>
+                            <div id="tempmax1"></div>
+                            <div id="message1"></div>
+                            <div id="date1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card" id="weather2">
+                    <div class="card-content">
+                        <div id="day2">
+                            <div id="condition2"></div>
+                            <div id="tempmin2"></div>
+                            <div id="tempmax2"></div>
+                            <div id="message2"></div>
+                            <div id="date2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card" id="weather3">
+                    <div class="card-content">
+                        <div id="day3">
+                            <div id="condition3"></div>
+                            <div id="tempmin3"></div>
+                            <div id="tempmax3"></div>
+                            <div id="humidity3"></div>
+                            <div id="message3"></div>
+                            <div id="date3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+            <div class="tile is-child box" id="zomato-tile">
+                <div class="column">
+                    <p class="title">Two</p>
+                    <h2>Top 10 Restaurants in the Area</h2>
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-half" id="zomato">
+                            <thead>
+                                <tr>
+                                    <th scope="col" id="restName">Name</th>
+                                    <th scope="col" id="restAddress">Address</th>
+                                    <th scope="col" id="restCuisine">Cuisine</th>
+                                </tr>
+                            </thead>
+                            <tbody id="zomato-body">
+                                <!-- Restuarant rows will appear here -->
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+        <div class="tile is-parent" id="results-page">
+          <div class="tile is-child box">
+            <p class="title">Your Results</p>
+            <ul id="event-name">
+                <table class="table table is-bordered" id="table-event">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="event-name">Event</th>
+                            <th scope="col" id="start-time">Start Time</th>
+                            <th scope="col" id="description">About</th>
+                            <!-- Events should show here -->
+                        </tr>
+                    </thead>
+                    <tbody id="body">
+                    </tbody>
+                </table>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    </div><!--end of main section container-fluid -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/final-logic.js"></script>
+</body>
+</html>

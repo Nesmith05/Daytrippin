@@ -1,0 +1,56 @@
+.hero {
+    text-align: center;
+
+    background-color: rgb(51, 116, 255);
+
+    /* color: white; */
+}
+body{
+    text-align: center;
+
+}
+
+table {
+    width: 500px;
+
+
+}
+#body {
+    width: 100px;
+}
+#top-ten{
+    flex-wrap: wrap;
+    margin: 20px;
+    text-align: center;
+}
+
+#searches{
+    margin: 20px;
+    margin-left: 50px;
+}
+.notification.is-primary {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 3px rgb(51, 116, 255), 0 0 0 1px rgb(51, 116, 255);
+    color: #4a4a4a;
+}
+#firebase-return {
+    font-size: 18px;
+}
+.columns.is-centered {
+    justify-content: center;
+}
+
+#results-page {
+    padding: 20px;
+}
+
+#table-event {
+    width: 700px;
+    margin-left: 30px;
+}
+#zomato {
+    width: 100px;
+}
+
+
