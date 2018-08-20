@@ -519,8 +519,8 @@ $(document).ready(function () {
         city = $("#city-input").val().trim();
         distanceInput = parseInt($("#distance-input").val().trim());
         console.log("Distance (mi)" + distanceInput);
-
-        if (city != '' && distanceInput > 0) {
+        
+        if (city != '' && distanceInput >= 50  && distanceInput <= 200) {
             $("#possible-results").empty();
             $(".destinationCard").empty();
             //convert distance from miles to km - set list of selected ranges because some of the search apis only accept up to 400km
@@ -543,9 +543,11 @@ $(document).ready(function () {
            
         }
         else {
+
             $("#possible-results").empty();
             $(".destinationCard").empty();
-            $("#possible-results").append("Please enter required information.");
+            $("#possible-results").show();
+            $("#possible-results").append("Please make sure you've entered a valid US city within range (50-200mi)");
         }
     });
     //if user were to click on links of multiple cities
