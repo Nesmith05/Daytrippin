@@ -43,6 +43,8 @@ table {
 
 #results-page {
     padding: 20px;
+    height: 50px;
+    width: 50px;
 }
 
 #table-event {
