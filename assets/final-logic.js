@@ -309,7 +309,7 @@ $(document).ready(function() {
 
     function clearResults() {
         $("#body").empty();
-        // $("#zomato-body").empty();
+        $("#zomato-body").empty();
     }
 
     //////////////////////NAKELL FUNCTION/////////////////////////
