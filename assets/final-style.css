@@ -50,6 +50,8 @@ table {
 
 #results-page {
     padding: 20px;
+    height: 50px;
+    width: 50px;
 }
 
 #table-event {
@@ -58,4 +60,7 @@ table {
 }
 #zomato {
     width: 100px;
+}
+#weather-tile {
+   max-height: 600px;
 }
