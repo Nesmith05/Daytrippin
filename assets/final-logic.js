@@ -75,7 +75,6 @@ $(document).ready(function() {
         // 1 mi, mi(Int) = 1.609344 km
         // 15 mi, mi(Int) = 15 × 1.609344 km = 24.14016 km
         distance = distanceInput * 1.609344
-
     }
 
 
@@ -97,19 +96,20 @@ $(document).ready(function() {
                     returnedLat = response.results[i].geometry.location.lat;
                     returnedLng = response.results[i].geometry.location.lng;
 
-    //  Need to collect the country & ensure entering US country
-                    //Could check the last 3 chars of the formatted_address?
-                    //ex:   "formatted_address": "Atlanta, GA, USA",
-
-                    function addResult(resultNum, location, lat, lng){
-                        cityResults.push({resultNum, location, lat, lng})
-                    };
-
-                    addResult(i, returnedCity, returnedLat, returnedLng);
+                    console.log("Country: " + returnedCity.substring(returnedCity.length - 3));
+                    var country3Char = returnedCity.substring(returnedCity.length - 3);
                     
-                    //create a clickable object for each city
-                    $("#possible-results").prepend("<a href='#'>" + returnedCity+ "</a><br>");
+                    //user validation - must be a us city.Google API always returns "USA" as last 3 characters for all US cities
+                    if(country3Char === "USA"){
+                        function addResult(resultNum, location, lat, lng){
+                            cityResults.push({resultNum, location, lat, lng})
+                        };
 
+                        addResult(i, returnedCity, returnedLat, returnedLng);
+                        
+                        //create a clickable object for each city. 
+                        $("#possible-results").prepend("<a href='#' id='multi-Results' city='"+returnedCity+"' lat='"+returnedLat+"' lng='"+returnedLng+"'>" + returnedCity+ "</a><br>");
+                    }
                 }
             }
             else if(response.results.length === 1){
@@ -117,12 +117,39 @@ $(document).ready(function() {
                 searchLat = response.results[0].geometry.location.lat;
                 searchLng = response.results[0].geometry.location.lng;
                 
+                console.log("Country: " + searchCity.substring(searchCity.length - 3));
+                var country3Char = searchCity.substring(searchCity.length - 3);
+                
+            //user validation - must be a us city.Google API always returns "USA" as last 3 characters for all US cities
+            //cannot be a function with out creating additional functions
+                if(country3Char === "USA"){
                 getBoundingBox([searchLat,searchLng],distance);
+                }
+                else{
+                    $("#possible-results").empty();
+                    $("#possible-results").append("That search returned no results within the USA. Please try again.");
+                }
             }
             else{
+                $("#possible-results").empty();
                 $("#possible-results").append("That search returned no results. Please try again.");
             }
         });
+    };
+
+    function citySelect(){
+        var citySearchLink = $(this);
+        console.log(this);
+        parseInt($("#distance-input").val().trim());
+        searchCity = citySearchLink.attr("city");
+        searchLat =  parseInt(citySearchLink.attr("lat"))
+        searchLng = parseInt(citySearchLink.attr("lng"));
+        console.log(searchCity);
+        console.log(searchLat);
+        console.log(searchLng);
+        $("#possible-results").empty();
+        console.log("Accepted search of user: (["+searchLat+", "+searchLng+"], "+distance+")");
+        getBoundingBox([searchLat,searchLng],distance);
     };
 
     //*******************************************************
@@ -242,6 +269,8 @@ $(document).ready(function() {
         });
     };
 
+
+
     function setDestination(){
         var destinationBox = $(this);
         console.log(this);
@@ -260,8 +289,16 @@ $(document).ready(function() {
         //show results
         $("#the-results").show();
         $("#results-page").show();
+        $(".destinationCities").on("click", clearResults());
+
+       
 
 
+    }
+
+    function clearResults() {
+        $("#body").empty();
+        $("#zomato-body").empty();
     }
 
     //////////////////////NAKELL FUNCTION/////////////////////////
@@ -314,7 +351,7 @@ $(document).ready(function() {
 
         var token = "&token=7RI4EOUJ2KE4ZQYMVVTZ";
         // var queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.address=charlotte" + token;
-        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + "&location.within=50mi" + token;
+        var queryURL = "https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=" + destinationLat + "&location.longitude=" + destinationLng + "&location.within=" + distanceInput + "mi" + token;
         console.log(queryURL);
 
         $.ajax({
@@ -343,6 +380,7 @@ $(document).ready(function() {
                 $("#body").append("<tr><td>" + "<a href=" + uRl +">" + eventName + "</a>" + "<td>" + moment(eventStart).format("llll") + " - " + moment(eventEnd).format("llll") + "<td>" +v.prune(eventDesc, 150));
                 //   $("<a>" + elink )
                 
+                
                     // console.log(categories);
                     // if (categories == "103", "101") {
                     //     response.events[i].hide();
@@ -350,6 +388,7 @@ $(document).ready(function() {
                 }
             // }
         });
+       
     };
 
             
@@ -447,6 +486,8 @@ $(document).ready(function() {
             // };
             console.log(city);
             console.log("Distance (km)" + distance);
+            
+            //USE GOOGLE API TO GET COORDINATES OF SEARCH CITY + VALIDATION
             googleGeoCode();
 
             //add to firebase
@@ -456,6 +497,7 @@ $(document).ready(function() {
             });
             $("#possible-results").show();
             $("#top-ten").show();
+            
            
         }
         else {
