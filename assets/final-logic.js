@@ -388,26 +388,44 @@ $(document).ready(function() {
         .then(function (response) {
             console.log(queryURL);
             console.log(response);
+            
+            $("#date1").empty();
+            $("#tempmin1").empty();
+            $("#tempmax1").empty();
+            $("#condition1").empty();
+            $("#message1").empty();
 
-            $("#date1").append("<h1>" + response.forecast.forecastday[0].date + "</h1>");
+            $("#date2").empty();
+            $("#tempmin2").empty();
+            $("#tempmax2").empty();
+            $("#condition2").empty();
+            $("#message2").empty();
+
+            $("#date3").empty();
+            $("#tempmin3").empty();
+            $("#tempmax3").empty();
+            $("#condition3").empty();
+            $("#message3").empty();
+            
+            $("#date1").append(response.forecast.forecastday[0].date);
             $("#tempmin1").append(response.forecast.forecastday[0].day.mintemp_f);
             $("#tempmax1").append(response.forecast.forecastday[0].day.maxtemp_f);
             $("#condition1").append(response.forecast.forecastday[0].day.condition.text);
-            $("#humidity1").append(response.forecast.forecastday[0].day.avghumidity + "%");
+            
             
             $("#date2").append(response.forecast.forecastday[1].date);
             $("#tempmin2").append(response.forecast.forecastday[1].day.mintemp_f);
             $("#tempmax2").append(response.forecast.forecastday[1].day.maxtemp_f);
             $("#condition2").append(response.forecast.forecastday[1].day.condition.text);
-            $("#humidity2").append(response.forecast.forecastday[1].day.avghumidity + "%");
+            
 
             $("#date3").append(response.forecast.forecastday[2].date);
             $("#tempmin3").append(response.forecast.forecastday[2].day.mintemp_f);
             $("#tempmax3").append(response.forecast.forecastday[2].day.maxtemp_f);
             $("#condition3").append(response.forecast.forecastday[2].day.condition.text);
-            $("#humidity3").append(response.forecast.forecastday[2].day.avghumidity + "%");
             
-            $("#date1").append("");
+            
+            
             reminder();
             //Natalie - moved declaring dayonemintemp to be outside of the 'then' function and setting the variable to be within the 'then' function due to errors encountered because 'response' is not defined outside of the 'then' function
             dayonemintemp = response.forecast.forecastday[0].day.mintemp_f;

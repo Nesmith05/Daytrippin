@@ -52,3 +52,6 @@ table {
 #zomato {
     width: 100px;
 }
+#weather-tile {
+   max-height: 600px;
+}
